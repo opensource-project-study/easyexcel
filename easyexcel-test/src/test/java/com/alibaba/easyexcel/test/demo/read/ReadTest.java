@@ -121,6 +121,15 @@ public class ReadTest {
         log.info("{}", demoDataList.size());
     }
 
+    @Test
+    public void testRead2() {
+        // 测试
+        String fileName = TestFileUtil.getPath() + "demo" + File.separator + "demo2.xlsx";
+        List<DemoData> demoDataList = new ArrayList<>();
+        EasyExcel.read(fileName, DemoData.class, new MyDemoDataListener(demoDataList)).sheet().doRead();
+        log.info("{}", demoDataList.size());
+    }
+
     /**
      * 指定列的下标或者列名
      *
@@ -209,6 +218,9 @@ public class ReadTest {
         // 这里 需要指定读用哪个class去读，然后读取第一个sheet
         EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet()
             // 这里可以设置1，因为头就是一行。如果多行头，可以设置其他值。不传入也可以，因为默认会根据DemoData 来解析，他没有指定头，也就是默认1行
+            // 设置为1，表示前1行是表头，那么前1行就会解析为表头；换句话说，如果此时前1行excel表中不填写为表头，excel解析就会出错。
+            // 设置为0，表示前0行是表头，也就是没有表头；此时excel表中可以不填写表头，从第1行起就会解析为数据。
+            // com.alibaba.excel.read.builder.AbstractExcelReaderParameterBuilder#headRowNumber注释写的很清楚
             .headRowNumber(1).doRead();
     }
 
