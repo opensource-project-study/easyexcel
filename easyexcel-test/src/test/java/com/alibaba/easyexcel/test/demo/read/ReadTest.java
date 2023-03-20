@@ -121,12 +121,15 @@ public class ReadTest {
         log.info("{}", demoDataList.size());
     }
 
+    /**
+     * 是否忽略空行
+     */
     @Test
     public void testRead2() {
         // 测试
         String fileName = TestFileUtil.getPath() + "demo" + File.separator + "demo2.xlsx";
         List<DemoData> demoDataList = new ArrayList<>();
-        EasyExcel.read(fileName, DemoData.class, new MyDemoDataListener(demoDataList)).sheet().doRead();
+        EasyExcel.read(fileName, DemoData.class, new MyDemoDataListener(demoDataList)).ignoreEmptyRow(false).sheet().doRead();
         log.info("{}", demoDataList.size());
     }
 

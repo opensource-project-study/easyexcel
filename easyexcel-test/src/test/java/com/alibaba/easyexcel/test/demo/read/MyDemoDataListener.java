@@ -26,4 +26,9 @@ public class MyDemoDataListener implements ReadListener<DemoData> {
     public void doAfterAllAnalysed(AnalysisContext context) {
 
     }
+
+//    @Override
+//    public boolean hasNext(AnalysisContext context) {
+//        return true;
+//    }
 }
